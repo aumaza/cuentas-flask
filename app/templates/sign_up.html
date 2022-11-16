@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Registro de Usuario{% endblock %}
+{% block content %}
+
+<div class="container">
+	<div class="jumbotron">
+
+		 <form method="POST">
+			  <div class="form-group">
+			    <label for="email">Nombre y Apellido:</label>
+			    <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese su Nombre y Apellido">
+			  </div>
+			  <div class="form-group">
+			    <label for="email">Email:</label>
+			    <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su Email">
+			  </div>
+			  <div class="form-group">
+			    <label for="pwd_1">Password:</label>
+			    <input type="password" class="form-control" id="pwd_1" name="pwd_1" placeholder="Ingrese su Password">  
+			  </div>
+			  <div class="form-group">
+			    <label for="pwd_2">Repita Password:</label>
+			    <input type="password" class="form-control" id="pwd_2" name="pwd_2" placeholder="Repita su Password">  
+			  </div>
+			  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registrarse</button>
+		</form> 
+
+	</div>
+</div>
+
+{% endblock %}

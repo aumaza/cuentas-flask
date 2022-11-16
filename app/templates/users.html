@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Usuarios{% endblock %}
+
+{% block content %}
+  
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</h2><hr>
+
+  <table class="display compact" style="width:100%" id="usersTable">
+    <thead>
+      <tr>
+        <th class='text-nowrap text-center'>Nombre</th>
+        <th class='text-nowrap text-center'>Usuario</th>
+        <th class='text-nowrap text-center'>Email</th>
+        <th class='text-nowrap text-center'>Role</th>
+        <th class='text-nowrap text-center'>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for usr in users %}
+        <tr>
+          <td align="center">{{ usr.name }}</td>
+          <td align="center">{{ usr.user }}</td>
+          <td align="center">{{ usr.email }}</td>
+          <td align="center">{{ usr.role }}</td>
+          <td class='text-nowrap' align="center">
+
+              <a href="/update_user/{{ usr.id }}" class="btn btn-primary "><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Cambiar Permisos</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table><hr>
+  <div class="alert alert-info"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span> <strong>Cantidad de Registros:</strong> {{ count }} </div><hr>
+
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>{% block title %}Cuentas{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/bootstrap-theme.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/bootstrap-theme.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/scrolling-nav.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/index.css') }}" >
+      
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/Chart.js/Chart.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/Chart.js/Chart.css') }}" >
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/jquery.dataTables.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/dataTables/buttons.dataTables.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/buttons.dataTables.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/buttons.bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/jquery.dataTables-1.11.5.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/dataTables/fixedColumns.dataTables.min.css') }}" >
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+      
+    <script src="{{ url_for('static', filename='skeleton/js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/bootstrap.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='skeleton/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/dataTables/DataTables/js/jquery.dataTables1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/dataTables/DataTables/js/dataTables.fixedColumns.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='skeleton/js/dataTables.editor.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/dataTables/DataTables/js/buttons.colVis.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='skeleton/js/jszip.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/pdfmake.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/vfs_fonts.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/buttons.print.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='skeleton/js/bootbox/bootbox.all.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/bootbox/bootbox.all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/bootbox/bootbox.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/bootbox/bootbox.locales.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootbox/bootbox.locales.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/js/bootbox/bootbox.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='skeleton/Chart.js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/Chart.js/Chart.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/Chart.js/Chart.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='skeleton/Chart.js/Chart.js') }}"></script>
+    
+    
+
+</head>
+<body style="background-color: #34495e;" onload="nobackbutton();">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      {% if user.is_authenticated %}
+        <a class="navbar-brand" href="/main">Cuentas</a>
+      {% else %}
+        <a class="navbar-brand" href="/">Cuentas</a>
+      {% endif %}
+    </div>
+    <ul class="nav navbar-nav">
+      {% if user.is_authenticated %}
+      
+
+      <li class="active"><a href="/servicios"><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Servicios</a></li>
+      <li class="active"><a href="/empresas"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Empresas</a></li>
+      <li class="active"><a href="/pagos"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pagos</a></li>
+      {% if user.name == "root" %}
+      <li class="active"><a href="/usuarios"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</a></li>
+      {% endif %}
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="{{ url_for('static', filename='uploads/{{user.avatar}}') }}" alt="user" class="avatar"> {{ user.name }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/avatar/{{ user.id }}"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Cambiar Avatar</a></li>
+          <li><a href="/user_bio/{{ user.id }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Mis Datos</a></li>
+          <li><a href="/change_password/{{ user.id }}"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Cambiar Password</a></li>
+          <li class="active"><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      {% else %}
+      <li><a href="/sign-up"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+      <li><a href="/password"><span class="glyphicon glyphicon-exclamation-sign"></span> Olvidé mi Password</a></li>
+      {% endif %}
+
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+          <div class="alert alert-danger alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> {{ message }}
+          </div>
+        {% else %}
+          <div class="alert alert-success alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{ message }}
+          </div>
+        {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+</div>
+  
+<div class="container-fluid">
+  {% block content %}{% endblock %}
+</div>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='skeleton/js/app.js') }}"></script>
+
+</body>
+</html>

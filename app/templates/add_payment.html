@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Agregar Pago{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Pago</h2><hr>      
+    
+    	 <form method="POST">
+          
+
+          <div class="form-group">
+            <label for="service">Servicio:</label>
+              <select class="form-control" name="service" id="service">
+                {% for service in services %}
+                  <option value="{{ service.descripcion }}">{{ service.descripcion }}</option>
+                {% endfor %}
+              </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="companie">Empresas:</label>
+              <select class="form-control" name="companie" id="companie">
+                {% for companie in companies %}
+                  <option value="{{ companie.empresa }}">{{ companie.empresa }}</option>
+                {% endfor %}
+              </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="fecha_venc">Fecha Vencimiento:</label>
+            <input type="date" class="form-control" id="fecha_venc" name="fecha_venc">
+          </div>
+          
+          <div class="form-group">
+            <label for="fecha_pago">Fecha Pago:</label>
+            <input type="date" class="form-control" id="fecha_pago" name="fecha_pago">
+          </div>
+          
+          <div class="form-group">
+            <label for="importe">Importe:</label>
+            <input type="text" class="form-control" id="importe" name="importe" placeholder="Ingrese el importe. Ej: Sin decimales 1500 / Con Decimales 1500.00">
+          </div>
+          
+          <button type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Agregar</button>
+        
+        </form> 
+    
+  </div>
+        
+</div>
+
+{% endblock %}

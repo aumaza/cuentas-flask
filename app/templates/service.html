@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Servicios{% endblock %}
+
+{% block content %}
+  
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h2><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Servicios</h2><hr>
+
+      <a href="/agregar_servicio"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Servicio</button></a><hr>
+
+  <table class="display compact" style="width:100%" id="servicesTable">
+    <thead>
+      <tr>
+        <th class='text-nowrap text-center'>Servicio</th>
+        <th class='text-nowrap text-center'>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for service in services %}
+        <tr>
+          <td align="center">{{ service.descripcion }}</td>
+          <td class='text-nowrap' align="center">
+            
+            <a href="/update_service/{{service.id}}" class="btn btn-primary "><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
+            
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table><hr>
+  <div class="alert alert-info"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span> <strong>Cantidad de Registros:</strong>  {{ count }}</div><hr>
+
+</div>
+</div>
+
+
+{% endblock %}

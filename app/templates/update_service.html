@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Agregar Servicios{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar Servicio</h1><hr>      
+    
+    	 <form method="POST">
+        
+          <div class="form-group">
+            <label for="service">Servicio:</label>
+            <input type="text" class="form-control" id="service" name="service" value="{{ service.descripcion }}" placeholder="Ingrese la descripción del Servicio. Ej.: Agua">
+          </div>
+          
+          <button type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar</button>
+        
+        </form> 
+    
+  </div>
+        
+</div>
+
+{% endblock %}
