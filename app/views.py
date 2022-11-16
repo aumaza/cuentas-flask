@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
@@ -63,7 +63,6 @@ def servicios():
 def pagos(id):
 	pays = Pagos.query.filter_by(id_user=id)
 	count = Pagos.query.filter_by(id_user=id).count()
-	print(pays)
 	return render_template('payments.html', pays=pays, count=count, user=current_user)
 
 
@@ -169,13 +168,12 @@ def load_picture(id):
 	if request.method == 'POST':
 		uploaded_file = request.files['file']
 		filename = secure_filename(uploaded_file.filename)
-		print('Imagen: %s' %filename)
-
+		
 		if filename != '':
 			file_ext = os.path.splitext(filename)[1]
 			if file_ext not in allow_types or \
 					file_ext != validate_image(uploaded_file.stream):
-				flash('El tipo de archivo debe ser JPG o PNG!', category='error')
+				flash('El tipo de archivo debe ser JPG, PNG, SVG o GIF!', category='error')
 			uploaded_file.save(UPLOADS_PATH+filename)
 			
 			usr.avatar = filename
@@ -185,6 +183,47 @@ def load_picture(id):
 		return redirect(url_for('views.main'))
 
 	return render_template('avatar.html', user=current_user)
+
+
+@views.route('add_ticket/<int:id>', methods=['GET', 'POST'])
+@login_required
+def add_ticket(id):
+	payment = Pagos.query.get_or_404(id)
+	allow_types = '.pdf'
+	UPLOADS_PATH = 'app/static/tickets/'
+
+	if request.method == 'POST':
+		uploaded_file = request.files['file']
+		filename = secure_filename(uploaded_file.filename)
+
+		if filename != '':
+			file_ext = os.path.splitext(filename)[1]
+			print(file_ext)
+			if file_ext not in allow_types:
+				flash('El tipo de archivo debe ser PDF!', category='error')
+			uploaded_file.save(UPLOADS_PATH+filename)
+
+			payment.comprobante = filename
+			db.session.add(payment)
+			db.session.commit()
+			flash('Comprobante Cargado Exitosamente!', category='success')
+		return redirect(url_for('views.main'))
+
+	return render_template('ticket.html', payment=payment, user=current_user)
+
+
+@views.route('/open_ticket/<path:comprobante>', methods=['GET', 'POST'])
+@login_required
+def open_ticket(comprobante):
+	dirname = 'app/static/tickets/'
+	return redirect(url_for('static', filename='tickets/' + comprobante), code=301)
+
+
+@views.route('/info_extended/<int:id>', methods=['GET', 'POST'])
+@login_required
+def info_extended(id):
+	payment = Pagos.query.get_or_404(id)
+	return render_template('info_extended.html', payment=payment, user=current_user)
 
 
 # ==========================================================

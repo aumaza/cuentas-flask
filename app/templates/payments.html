@@ -5,7 +5,7 @@
   
   <div class="container-fluid">
     <div class="jumbotron">
-      <h2><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pagos - Usuario {{ user.name }}</h2><hr>
+      <h2><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> {{ user.name }} - Mis Pagos Realizados</h2><hr>
 
       <a href="/agregar_pago/{{ user.id }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Pago</button></a><hr>
 
@@ -32,6 +32,12 @@
 
               <a href="/update_payment/{{ pay.id }}" class="btn btn-primary "><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a>
               <a href="/delete_payment/{{ pay.id }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar</a>
+              {% if pay.comprobante is none %}
+              <a href="/add_ticket/{{ pay.id }}" class="btn btn-warning"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> Añadir Comprobante</a>
+              {% else %}
+              <a href="/open_ticket/{{ pay.comprobante }}" class="btn btn-success" target="_blank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Comprobante</a>
+              {% endif %}
+              <a href="/info_extended/{{ pay.id }}" class="btn btn-info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Info Extendida</a>
           </td>
         </tr>
       {% endfor %}

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd ../cuentas/
+cd ../cuentas-flask/
 . venv/bin/activate
 python3 main.py

@@ -73,7 +73,6 @@
     <ul class="nav navbar-nav">
       {% if user.is_authenticated %}
       
-
       <li class="active"><a href="/servicios"><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Servicios</a></li>
       <li class="active"><a href="/empresas"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Empresas</a></li>
       <li class="active"><a href="/pagos/{{ user.id }}"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pagos</a></li>
@@ -84,7 +83,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="{{ url_for('static', filename='uploads/{{user.avatar}}') }}" alt="user" class="avatar"> {{ user.name }}
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="static/uploads/{{ user.avatar }}" alt="user" class="avatar"> {{ user.name }}
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/avatar/{{ user.id }}"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Cambiar Avatar</a></li>
