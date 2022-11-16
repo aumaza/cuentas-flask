@@ -58,11 +58,11 @@ def servicios():
 	print(services)
 	return render_template('service.html', services=services, count=count, user=current_user)
 
-@views.route('/pagos')
+@views.route('/pagos/<int:id>')
 @login_required
-def pagos():
-	pays = Pagos.query
-	count = Pagos.query.count()
+def pagos(id):
+	pays = Pagos.query.filter_by(id_user=id)
+	count = Pagos.query.filter_by(id_user=id).count()
 	print(pays)
 	return render_template('payments.html', pays=pays, count=count, user=current_user)
 
@@ -116,9 +116,11 @@ def add_companie():
 	return render_template('add_companie.html', user=current_user)
 
 
-@views.route('/agregar_pago', methods=['GET', 'POST'])
+@views.route('/agregar_pago/<int:id>', methods=['GET', 'POST'])
 @login_required
-def add_payment():
+def add_payment(id):
+	usr = User.query.get_or_404(id)
+
 	if request.method == 'POST':
 		service = request.form.get('service')
 		companie = request.form.get('companie')
@@ -135,7 +137,7 @@ def add_payment():
 		if len(service) == 0 or len(companie) == 0 or len(f_venc) == 0 or len(f_pay) == 0 or len(payment) == 0:
 			flash('Hay campos sin completar', category='error')
 		else:
-			new_payment = Pagos(servicio=service, fecha_venc=f_venc, empresa=companie, fecha_pago=f_pay, importe=payment)
+			new_payment = Pagos(servicio=service, fecha_venc=f_venc, empresa=companie, fecha_pago=f_pay, importe=payment, id_user=usr.id)
 			db.session.add(new_payment)
 			db.session.commit()
 			flash('Pago Agregado Exitosamente!', category='success')

@@ -5,9 +5,9 @@
   
   <div class="container-fluid">
     <div class="jumbotron">
-      <h2><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pagos</h2><hr>
+      <h2><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pagos - Usuario {{ user.name }}</h2><hr>
 
-      <a href="/agregar_pago"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Pago</button></a><hr>
+      <a href="/agregar_pago/{{ user.id }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Pago</button></a><hr>
 
   <table class="display compact" style="width:100%" id="paymentTable">
     <thead>

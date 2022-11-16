@@ -28,3 +28,4 @@ class Pagos(db.Model):
 	fecha_pago = db.Column(db.String(15))
 	importe = db.Column(db.Float)
 	comprobante = db.Column(db.String(200))
+	id_user = db.Column(db.Integer)
