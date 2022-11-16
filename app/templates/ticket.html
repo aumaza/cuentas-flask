@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Añadir Comprobante{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1><span class="glyphicon glyphicon-tag"></span> Añadir Comprobante de Pago</h1>      
+    <p>Seleccione el comprobante de pago de: </p><hr>
+     <ul class="list-group">
+        <li class="list-group-item">Empresa <span class="badge">{{ payment.empresa }}</span></li>
+        <li class="list-group-item">Fecha Pago <span class="badge">{{ payment.fecha_pago }}</span></li>
+        <li class="list-group-item">Importe <span class="badge">${{ payment.importe }}</span></li>
+      </ul><hr>
+
+    
+     <form method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Seleccione Archivo:</label>
+        <input type="file" id="file" name="file">
+      </div>
+      
+      <button type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+    </form> 
+    
+  </div>
+     
+</div>
+
+{% endblock %}

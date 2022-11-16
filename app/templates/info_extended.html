@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block title %}Cuentas - Información Extendida de Pago{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+  <div class="jumbotron">
+    <h1><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Información Extendida</h1>      
+    <p>Desde aquí puede ver toda la información de dicho pago</p><hr>
+     <ul class="list-group">
+      <li class="list-group-item"><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Servicio <span class="badge">{{ payment.servicio }}</span></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Empresa <span class="badge">{{ payment.empresa }}</span></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Fecha Vencimiento <span class="badge">{{ payment.fecha_venc }}</span></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Fecha Pago <span class="badge">{{ payment.fecha_pago }}</span></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Importe <span class="badge">{{ payment.importe }}</span></li>
+      {% if payment.comprobante %}
+      <a href="/open_ticket/{{ payment.comprobante }}"><li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Comprobante <span class="badge">{{ payment.comprobante }}</span></li></a>
+      {% else %}
+      <a href="/add_ticket/{{ payment.id }}"><li class="list-group-item list-group-item-warning"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></span> Agregar Comprobante <span class="badge">Seleccionar</span></li></a>
+      {% endif %}
+
+    </ul><hr>
+  </div>
+        
+</div>
+
+{% endblock %}
