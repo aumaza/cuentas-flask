@@ -140,7 +140,7 @@ def add_payment(id):
 			db.session.add(new_payment)
 			db.session.commit()
 			flash('Pago Agregado Exitosamente!', category='success')
-			return redirect(url_for('views.pagos'))
+			return redirect(url_for('views.pagos', id=id))
 
 
 
@@ -375,7 +375,7 @@ def delete_payment(id):
 		db.session.delete(payment)
 		db.session.commit()
 		flash('Registro Eliminado!', category='success')
-		return redirect(url_for('views.pagos'))
+		return redirect(url_for('views.pagos', id=payment.id_user))
 
 
 	return render_template('delete_payment.html', payment=payment, user=current_user)
