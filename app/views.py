@@ -127,12 +127,6 @@ def add_payment(id):
 		f_pay = request.form.get('fecha_pago')
 		payment = request.form.get('importe')
 
-		print(service)
-		print(companie)
-		print(f_venc)
-		print(f_pay)
-		print(payment)
-
 		if len(service) == 0 or len(companie) == 0 or len(f_venc) == 0 or len(f_pay) == 0 or len(payment) == 0:
 			flash('Hay campos sin completar', category='error')
 		else:
@@ -141,8 +135,6 @@ def add_payment(id):
 			db.session.commit()
 			flash('Pago Agregado Exitosamente!', category='success')
 			return redirect(url_for('views.pagos', id=id))
-
-
 
 	servicios = Servicios.query.order_by(Servicios.descripcion.asc())
 	empresas = Empresas.query.order_by(Empresas.empresa.asc())
