@@ -15,7 +15,7 @@ def login():
 		password = request.form.get('pwd')
 
 		user = User.query.filter_by(user=user).first()
-		
+
 
 		if user == "" or password == "":
 			flash('Debe completar los campos!', category='error')
@@ -86,7 +86,7 @@ def password():
 			elif pass_1 != pass_2:
 				flash('Los Password no coinciden!', category='error')
 			else:
-				user.password = generate_password_hash(pass_1, method='sha256')
+				user.password = generate_password_hash(pass_1, method='pbkdf2', salt_length=16)
 				db.session.add(user)
 				db.session.commit()
 				flash('Su Password se ha actualizado Exitosamente!', category='success')

@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/mnt/sda3/projects/Python/cuentas/venv"
+set -gx VIRTUAL_ENV "/mnt/storage/desarrollo/python/cuentas-flask/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
