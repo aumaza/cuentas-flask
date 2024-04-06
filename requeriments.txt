@@ -1,1 +1,5 @@
-pip install flask flask-sqlalchemy flask-login
+flask
+flask-sqlalchemy
+flask-login
+bcrypt
+gunicorn

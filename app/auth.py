@@ -61,7 +61,7 @@ def sign_up():
 		elif len(pass_1) < 8:
 			flash('El Password no puede ser menor a 8 caracteres', category='error')
 		else:
-			new_user = User(name=name, user=email, email=email, password=generate_password_hash(pass_1, method='sha256'), role=1)
+			new_user = User(name=name, user=email, email=email, password=generate_password_hash(pass_1, method='pbkdf2', salt_length=16), role=1)
 			db.session.add(new_user)
 			db.session.commit()
 			#login_user(user, remember=True)
